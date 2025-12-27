@@ -18,7 +18,7 @@ def count_word_frequencies(text):
 word_frequencies = count_word_frequencies(transcript_content)
 
 def print_word_frequencies(word_counts):
-    for word, count in word_counts.items():
+    for word, count in sorted(word_counts.items(), key=lambda item: item[1], reverse=True):
         print(f"'{word}': {'#' * count}")
 
 print_word_frequencies(word_frequencies)
