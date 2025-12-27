@@ -17,9 +17,12 @@ def count_word_frequencies(text):
 
 word_frequencies = count_word_frequencies(transcript_content)
 
+MIN_COUNT_THRESHOLD = 3
+
 def print_word_frequencies(word_counts):
     for word, count in sorted(word_counts.items(), key=lambda item: item[1], reverse=True):
-        print(f"'{word}': {'#' * count}")
+        if count > MIN_COUNT_THRESHOLD:
+            print(f"'{word}': {count} {'#' * count}")
 
 print_word_frequencies(word_frequencies)
 
