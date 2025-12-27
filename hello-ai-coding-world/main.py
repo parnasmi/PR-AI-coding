@@ -1,3 +1,6 @@
 message = "Hello AI Coding World"
+def print_message(msg):
+    print(msg)
+
 for _ in range(10):
-    print(message)
+    print_message(message)
