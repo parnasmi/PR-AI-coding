@@ -1,9 +1,13 @@
-# PAICC - Multi-File Editing - Simple Transcript Analytics
+# PAICC – Multi-File Editing – Simple Transcript Analytics (Node.js)
 
-> Multi-file editing with AI Coding
+> Multi-file editing with AI Coding using Node.js and TypeScript
+
+---
 
 ## Setup
 
-- Install dependencies: `uv sync`
-- Copy `env.sample` to `env` set your OPENAI_API_KEY.
-- Run the script: `uv run main`
+### 1. Install dependencies
+
+```bash
+npm install
+```

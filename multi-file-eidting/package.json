@@ -1,0 +1,25 @@
+{
+  "name": "pr-ai-coding",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parnasmi/PR-AI-coding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parnasmi/PR-AI-coding/issues"
+  },
+  "homepage": "https://github.com/parnasmi/PR-AI-coding#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

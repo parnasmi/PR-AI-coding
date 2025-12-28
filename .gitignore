@@ -2,3 +2,6 @@
 .DS_Store
 .env
 about-readme.md
+.vscode/
+.vscode-test/
+**/node_modules/
