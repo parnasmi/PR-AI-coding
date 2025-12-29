@@ -1,5 +1,8 @@
+import "dotenv/config";
 import { readFileSync } from "node:fs";
-import { getTranscriptFilePath } from "./arg_parse";
+import { analyzeTranscript } from "./llm";
+import { getTranscriptFilePath, getMinCountThreshold } from "./arg_parse";
+import { word_blacklist } from "./constants";
 
 function readTranscript(filePath: string): string {
   return readFileSync(filePath, "utf-8");
@@ -13,7 +16,10 @@ function countWordFrequencies(text: string): Record<string, number> {
   const words = text.split(/\s+/);
 
   for (let word of words) {
-    word = word.toLowerCase(); // Normalize to lowercase
+    word = word.toLowerCase().replace(/[?.,!]/g, ""); // Normalize to lowercase and strip punctuation
+    if (word_blacklist.includes(word)) {
+      continue;
+    }
     if (wordCounts[word]) {
       wordCounts[word] += 1;
     } else {
@@ -26,7 +32,7 @@ function countWordFrequencies(text: string): Record<string, number> {
 
 const wordFrequencies = countWordFrequencies(transcriptContent);
 
-const MIN_COUNT_THRESHOLD = 3;
+const MIN_COUNT_THRESHOLD = getMinCountThreshold();
 
 function printWordFrequencies(wordCounts: Record<string, number>): void {
   Object.entries(wordCounts)
@@ -39,3 +45,15 @@ function printWordFrequencies(wordCounts: Record<string, number>): void {
 }
 
 printWordFrequencies(wordFrequencies);
+
+analyzeTranscript(transcriptContent, wordFrequencies)
+  .then((analysis) => {
+    console.log("\nTranscript Analysis:");
+    console.log("Quick Summary:", analysis.quick_summary);
+    console.log("Bullet Point Highlights:", analysis.bullet_point_highlights);
+    console.log("Sentiment Analysis:", analysis.sentiment_analysis);
+    console.log("Keywords:", analysis.keywords.join(", "));
+  })
+  .catch((error) => {
+    console.error("Error analyzing transcript:", error);
+  });
